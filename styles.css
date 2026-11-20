@@ -114,7 +114,13 @@ a { color: var(--cyan); }
   flex: 0 0 auto;
 }
 
-.logo { width: 34px; height: 34px; display: block; }
+.logo {
+  width: 38px;
+  height: 38px;
+  display: block;
+  border-radius: 10px;
+  box-shadow: 0 0 0 1px rgba(167, 139, 250, .25), 0 10px 24px -12px rgba(99, 102, 241, .9);
+}
 
 .brand__text { display: grid; line-height: 1.15; }
 .brand__text strong {
