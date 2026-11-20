@@ -164,6 +164,17 @@
     let width = 0;
     let height = 0;
     let points = [];
+    const meteors = [];
+
+    function spawnMeteor() {
+      meteors.push({
+        x: width * (0.15 + Math.random() * 0.75),
+        y: height * (0.05 + Math.random() * 0.35),
+        vx: -(2.2 + Math.random() * 2.2),
+        vy: 1 + Math.random() * 1.4,
+        life: 1,
+      });
+    }
 
     function build() {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -196,6 +207,30 @@
         ctx.fill();
       }
       ctx.globalAlpha = 1;
+
+      if (!reduceMotion && Math.random() < 0.002) spawnMeteor();
+
+      for (let i = meteors.length - 1; i >= 0; i--) {
+        const m = meteors[i];
+        m.x += m.vx;
+        m.y += m.vy;
+        m.life -= 0.012;
+        if (m.life <= 0 || m.x < -200 || m.y > height + 200) {
+          meteors.splice(i, 1);
+          continue;
+        }
+        const tailX = m.x - m.vx * 10;
+        const tailY = m.y - m.vy * 10;
+        const grad = ctx.createLinearGradient(m.x, m.y, tailX, tailY);
+        grad.addColorStop(0, "rgba(226, 234, 255, " + (0.7 * m.life).toFixed(3) + ")");
+        grad.addColorStop(1, "rgba(226, 234, 255, 0)");
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.moveTo(m.x, m.y);
+        ctx.lineTo(tailX, tailY);
+        ctx.stroke();
+      }
     }
 
     function loop(time) {
@@ -215,6 +250,27 @@
     build();
     loop(0);
   })();
+
+  /* --------------------------- Появление блоков --------------------------- */
+
+  if (!reduceMotion && "IntersectionObserver" in window) {
+    const items = $$(".block, .cta-band, .price, .person, .mods, .founder");
+    items.forEach((el) => el.classList.add("reveal"));
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.08, rootMargin: "0px 0px -50px 0px" }
+    );
+
+    items.forEach((el) => observer.observe(el));
+  }
 
   /* --------------------------- Печать правил --------------------------- */
 
