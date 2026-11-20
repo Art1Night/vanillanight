@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VanillaNight — чистое ванильное выживание · 1.21–26.3</title>
+<meta name="description" content="Ванильный Minecraft-сервер без приватов, магазинов и pay-to-win. Вайтлист по заявке, голосовой чат, два подключения. IP: 135.125.188.210:40029">
+<meta name="theme-color" content="#05070f">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VanillaNight">
+<meta property="og:title" content="VanillaNight — чистое ванильное выживание">
+<meta property="og:description" content="Без приватов, магазинов и /home. Вайтлист по заявке, голосовой чат. Java 1.21–26.3.">
+<meta property="og:url" content="https://art1night.fun/">
+<meta property="og:image" content="https://art1night.fun/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="VanillaNight — чистое ванильное выживание, IP 135.125.188.210:40029">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://art1night.fun/og.png">
+<link rel="canonical" href="https://art1night.fun/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%99%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Unbounded:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<canvas id="stars" aria-hidden="true"></canvas>
+<a class="skip" href="#main">Перейти к содержанию</a>
+
+<header class="site-head">
+  <div class="wrap head-row">
+    <a class="brand" href="#home" data-tab="home" aria-label="VanillaNight — на главную">
+      <svg class="logo" viewBox="0 0 40 40" aria-hidden="true">
+        <defs>
+          <linearGradient id="moonGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#d8ccff"/><stop offset="1" stop-color="#67e8f9"/>
+          </linearGradient>
+        </defs>
+        <path d="M28.5 3.5a15.5 15.5 0 1 0 8 26.5A17 17 0 0 1 28.5 3.5Z" fill="url(#moonGrad)"/>
+        <circle cx="32.5" cy="9" r="1.5" fill="#fff" opacity=".9"/>
+        <circle cx="36" cy="14" r=".9" fill="#fff" opacity=".65"/>
+      </svg>
+      <span class="brand__text">
+        <strong>VanillaNight</strong>
+        <small>чистое выживание</small>
+      </span>
+    </a>
+
+    <nav class="tabs" role="tablist" aria-label="Разделы сайта">
+      <button class="tab is-active" role="tab" data-tab="home" aria-selected="true">Главная</button>
+      <button class="tab" role="tab" data-tab="rules" aria-selected="false">Правила</button>
+      <button class="tab" role="tab" data-tab="donate" aria-selected="false">Донат</button>
+      <button class="tab" role="tab" data-tab="staff" aria-selected="false">Стафф</button>
+      <button class="tab" role="tab" data-tab="faq" aria-selected="false">FAQ</button>
+    </nav>
+
+    <div class="head-actions">
+      <span class="status-pill" id="statusPill" title="Статус сервера">
+        <i></i><span id="statusText">···</span>
+      </span>
+      <a class="btn btn--small" href="https://discord.gg/eUhHUwq5Gh" target="_blank" rel="noopener">Discord</a>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+
+  <!-- ============================ ГЛАВНАЯ ============================ -->
+  <section class="panel" data-panel="home" role="tabpanel" aria-label="Главная">
+
+    <div class="hero">
+      <div class="hero__copy">
+        <span class="eyebrow">✦ Сезон с 16.10.2026</span>
+        <h1>Ванильное<br>выживание<br><em>после заката</em></h1>
+        <p class="lead">Без приватов, магазинов и <code>/home</code>. Только мир, ночь и люди, с которыми хочется строить. Вайтлист — чтобы на сервере было спокойно.</p>
+        <div class="cta-row">
+          <button class="btn btn--primary" data-copy="135.125.188.210:40029">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg>
+            Скопировать IP
+          </button>
+          <a class="btn btn--ghost" href="https://discord.gg/eUhHUwq5Gh" target="_blank" rel="noopener">Зайти в Discord</a>
+        </div>
+        <p class="hint">Java Edition · 1.21–26.3 · лицензия не обязательна</p>
+      </div>
+
+      <aside class="card server-card">
+        <div class="sc-head">
+          <span class="eyebrow">Подключение</span>
+          <span class="online" id="heroStatus"><i></i><b id="heroOnline">···</b><small>онлайн</small></span>
+        </div>
+
+        <button class="ip" data-copy="135.125.188.210:40029">
+          <span class="ip__label">main · EU</span>
+          <span class="ip__value">135.125.188.210:40029</span>
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg>
+        </button>
+        <button class="ip" data-copy="212.22.85.14:40029">
+          <span class="ip__label">ru · Россия</span>
+          <span class="ip__value">212.22.85.14:40029</span>
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg>
+        </button>
+
+        <div class="domains">
+          <button class="chip" data-copy="vanilla.art1night.fun">vanilla.art1night.fun</button>
+          <button class="chip" data-copy="vanillaru.art1night.fun">vanillaru.art1night.fun</button>
+        </div>
+
+        <dl class="sc-meta">
+          <div><dt>Версия</dt><dd>1.21 – 26.3</dd></div>
+          <div><dt>Ядро</dt><dd>1.21.11</dd></div>
+          <div><dt>Старт сезона</dt><dd>16.10.2026</dd></div>
+          <div><dt>Доступ</dt><dd>по вайтлисту</dd></div>
+        </dl>
+      </aside>
+    </div>
+
+    <section class="block">
+      <header class="section-head">
+        <span class="eyebrow">✦ Что внутри</span>
+        <h2>Сервер, где всё решает игра</h2>
+        <p>Ни магазина, ни приватов, ни привилегий в бою — только ванильные механики и договорённости между игроками.</p>
+      </header>
+      <div class="features">
+        <article class="card feature">
+          <span class="feature__ico">🌙</span>
+          <h3>Чистая ваниль</h3>
+          <p>Ни приватов, ни магазинов, ни <code>/home</code>. Всё, что есть — мир и правила.</p>
+        </article>
+        <article class="card feature">
+          <span class="feature__ico">🛡</span>
+          <h3>Вайтлист</h3>
+          <p>Заявка в Discord-тикете. Модерация вручную, чтобы на сервере было спокойно.</p>
+        </article>
+        <article class="card feature">
+          <span class="feature__ico">🎙</span>
+          <h3>Голосовой чат</h3>
+          <p>Simple Voice Chat: слышно тех, кто рядом. Можно молчать — тоже нормально.</p>
+        </article>
+        <article class="card feature">
+          <span class="feature__ico">🧩</span>
+          <h3>Моды</h3>
+          <p>EmoteCraft, PatPat, Customizable Player Models — эмоции и внешний вид.</p>
+        </article>
+        <article class="card feature">
+          <span class="feature__ico">🌍</span>
+          <h3>Два подключения</h3>
+          <p>main для EU и ru для России. Выбирай то, что ближе по пингу.</p>
+        </article>
+        <article class="card feature">
+          <span class="feature__ico">⚖️</span>
+          <h3>Без pay-to-win</h3>
+          <p>Спонсорка — удобства и косметика. В бою она не даёт ничего.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="block">
+      <header class="section-head">
+        <span class="eyebrow">✦ Первый шаг</span>
+        <h2>Как зайти</h2>
+      </header>
+      <div class="steps">
+        <article class="card step">
+          <span class="step__num">01</span>
+          <h3>Заявка</h3>
+          <p>Зайди в Discord и открой тикет: укажи ник, версию и пару слов о себе.</p>
+        </article>
+        <article class="card step">
+          <span class="step__num">02</span>
+          <h3>Одобрение</h3>
+          <p>Администрация проверит заявку и выдаст доступ к вайтлисту.</p>
+        </article>
+        <article class="card step">
+          <span class="step__num">03</span>
+          <h3>Подключение</h3>
+          <p>Добавь сервер по IP, версия 1.21–26.3. Лицензия не нужна.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="card cta-band">
+      <div>
+        <h2>Сезон идёт с 16 октября</h2>
+        <p>Мир уже строится. Самое время занять место.</p>
+      </div>
+      <div class="cta-row">
+        <button class="btn btn--primary" data-copy="135.125.188.210:40029">Скопировать IP</button>
+        <a class="btn btn--ghost" href="#donate" data-tab="donate">Поддержать сервер</a>
+      </div>
+    </section>
+
+  </section>
+
+  <!-- ============================ ПРАВИЛА ============================ -->
+  <section class="panel" data-panel="rules" role="tabpanel" aria-label="Правила" hidden>
+    <header class="section-head">
+      <span class="eyebrow">Редакция от 29.10.2026</span>
+      <h2>Правила VanillaNight</h2>
+      <p>Действуют в игре и в официальных пространствах: Discord, форум, голосовые каналы, публичные чаты. Личные переписки не модерируются, кроме угроз, слива данных, обхода бана и координации читов или гриферства.</p>
+    </header>
+
+    <div class="notice">
+      <strong>Заходя на сервер, вы соглашаетесь с правилами.</strong> Незнание или неверное понимание не освобождает от ответственности. Жалобы и апелляции — только через тикеты в Discord.
+    </div>
+
+    <details class="acc" open>
+      <summary>Раздел 1 · Общие положения <span>8 пунктов</span></summary>
+      <div class="acc__body">
+        <p class="rule"><span class="num">1.1</span><span>Заходя на сервер, вы соглашаетесь с настоящими правилами. Незнание или неверное понимание не освобождает от ответственности.</span></p>
+        <p class="rule"><span class="num">1.2</span><span>Наказание выдаётся по факту нарушения, подтверждённого доказательствами. Нарушение может быть выявлено по жалобе игрока или администрацией самостоятельно.</span></p>
+        <p class="rule"><span class="num">1.3</span><span>Средства за платные услуги — добровольное пожертвование, возврату не подлежат. Ресурсы возвращаются только при подтверждённой потере по вине администрации или как компенсация за действия наказанного игрока; размер и способ определяет администрация, решение фиксируется и обжалуется.</span></p>
+        <p class="rule"><span class="num">1.4</span><span>Правила действуют в игре и в официальных пространствах сервера: Discord, форум, голосовые каналы, публичные чаты. Личные переписки не модерируются, кроме угроз, слива личных данных, обхода бана и координации читов или гриферства.</span></p>
+        <p class="rule"><span class="num">1.5</span><span>Вид и длительность наказания определяются администрацией исходя из тяжести нарушения и истории игрока.</span></p>
+        <p class="rule"><span class="num">1.6</span><span>Владелец аккаунта несёт полную ответственность за свой аккаунт. Разрешён один основной аккаунт.</span></p>
+        <p class="rule"><span class="num">1.7</span><span>Жалобы на незначительные нарушения — 3 дня с момента нарушения. На читы, гриферство, угрозы, слив личных данных — без срока при наличии доказательств.</span></p>
+        <p class="rule"><span class="num">1.8</span><span>Если правила не описывают конкретный случай, администрация действует по аналогии с ближайшими пунктами, не создавая новых запретов задним числом.</span></p>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary>Раздел 2 · Игровой процесс <span>11 пунктов</span></summary>
+      <div class="acc__body">
+        <p class="rule"><span class="num">2.1</span><span>Запрещается использование и хранение модификаций и подобных средств, дающих несправедливое преимущество: Xray, автоматизация игрового процесса (baritone, autofish и т.д.), получение сида мира, помощь в наводке, удары по таймингу, автобаф, freecam (разрешён только freecam, который НЕ может летать через стены), litematica printer.</span></p>
+        <p class="rule"><span class="num">2.2</span><span>Запрещается использовать баги и уязвимости правил, Minecraft, модов, плагинов и прочих дополнений для получения преимущества. О найденном баге нужно сообщить администрации через тикеты.</span></p>
+        <p class="rule"><span class="num">2.3</span><span>Отказ от проверки на запрещённые модификации приравнивается к их использованию.</span></p>
+        <p class="rule"><span class="num">2.4</span><span>Запрещено гриферство: воровство ресурсов, разрушение построек, помехи комфортной игре, засорение территорий, убийства без оснований, многократный несмешной троллинг даже после просьб прекратить.</span></p>
+        <p class="rule"><span class="num">2.5</span><span>Запрещены помехи игре и работе администрации.</span></p>
+        <p class="rule"><span class="num">2.6</span><span>Запрещено постить, создавать или иным образом показывать банворды (слова, за которые банят на Twitch).</span></p>
+        <p class="rule"><span class="num">2.7</span><span>Запрещена любая политика из реальной жизни, в том числе использование символики реальных стран (даже распавшихся) и упоминания вооружённых конфликтов.</span></p>
+        <p class="rule"><span class="num">2.8</span><span>Запрещено использование нацистской символики в любом виде, а также любой символики, которая может быть похожа на нацистскую или сложно отличима от неё (скины, музыка, символы, слова и т.д.).</span></p>
+        <p class="rule"><span class="num">2.9</span><span>Запрещены помехи работоспособности сервера (лаг-машины, огромные скопления сущностей).</span></p>
+        <p class="rule"><span class="num">2.10</span><span>Запрещено принуждение игрока к взаимодействию, если он не желает этого (PvP и подобное).</span></p>
+        <p class="rule"><span class="num">2.11</span><span>Запрещён обман игроков при обмене, торговле и выполнении оплаченных заказов: получение предметов или АР без встречной передачи, подмена товара, невыполнение оплаченного заказа.</span></p>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary>Раздел 3 · Общение <span>10 пунктов</span></summary>
+      <div class="acc__body">
+        <p class="rule"><span class="num">3.1</span><span>Запрещены клевета, дезинформация и обман администрации.</span></p>
+        <p class="rule"><span class="num">3.2</span><span>Запрещено распространение личной информации игроков без их согласия.</span></p>
+        <p class="rule"><span class="num">3.3</span><span>Запрещены унижения, буллинг, оскорбления и дискриминация по религии, национальности, расе, полу, стране и другим признакам. Относитесь к другим с базовым уважением.</span></p>
+        <p class="rule"><span class="num">3.4</span><span>Реклама — только с согласования с администрацией.</span></p>
+        <p class="rule"><span class="num">3.5</span><span>Запрещены контент 18+, шокирующие материалы и контент, вызывающий отвращение.</span></p>
+        <p class="rule"><span class="num">3.6</span><span>Запрещено засорение чата: флуд, спам, капс, оффтоп.</span></p>
+        <p class="rule"><span class="num">3.7</span><span>Запрещено чрезмерно пинговать и упоминать игроков и администрацию, особенно после просьбы прекратить.</span></p>
+        <p class="rule"><span class="num">3.8</span><span>Запрещено мешать в голосовых чатах: музыка, лишние звуки, перекрикивание.</span></p>
+        <p class="rule"><span class="num">3.9</span><span>Запрещены целенаправленная клевета на сервер и разжигание вражды между серверами. Аргументированная критика в тикетах разрешена.</span></p>
+        <p class="rule"><span class="num">3.10</span><span>По просьбе человека прекращайте личные высказывания в его адрес.</span></p>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary>Раздел 4 · Администрация <span>10 пунктов</span></summary>
+      <div class="acc__body">
+        <p class="rule"><span class="num">4.1</span><span>Администрации запрещено пользоваться привилегиями в личных целях и для получения преимущества над игроками.</span></p>
+        <p class="rule"><span class="num">4.2</span><span>Администрации запрещено распространять информацию, которую не должен получать обычный игрок.</span></p>
+        <p class="rule"><span class="num">4.3</span><span>Администратор, играющий как обычный игрок, должен чётко разделять рабочее и игровое состояние. В роли игрока он не может летать, использовать креатив и другие привилегии.</span></p>
+        <p class="rule"><span class="num">4.4</span><span>Вся администрация должна помогать друг другу и обращаться за советом, если не знает, как поступить.</span></p>
+        <p class="rule"><span class="num">4.5</span><span>Если нарушение незначительно, сначала стоит предупредить игрока, прежде чем выдавать серьёзное наказание.</span></p>
+        <p class="rule"><span class="num">4.6</span><span>Администрация может вызвать вас на проверку читов в любой момент при наличии подозрений.</span></p>
+        <p class="rule"><span class="num">4.7</span><span>Администратор не рассматривает жалобы на друзей, врагов или людей, с которыми у него личный конфликт.</span></p>
+        <p class="rule"><span class="num">4.8</span><span>За нарушение правил администратором наказание может быть вплоть до снятия с должности.</span></p>
+        <p class="rule"><span class="num">4.9</span><span>Администрация не обязана отвечать вам где-либо, кроме тикетов. Исключение — отсутствие возможности писать в тикеты.</span></p>
+        <p class="rule"><span class="num">4.10</span><span>Администрация обязана применять правила последовательно и объективно. Здравый смысл используется для оценки доказательств и тяжести нарушения, но не для создания новых запретов задним числом.</span></p>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary>Раздел 5 · Территория и собственность <span>13 пунктов</span></summary>
+      <div class="acc__body">
+        <p class="rule"><span class="num">5.1</span><span>Частная территория — это постройки игрока плюс обозначенная зона: забор, стены, ворота, таблички; дополнительно можно указать в канале приватов. Запрещено возводить постройки, размещать механизмы, сундуки, таблички и иные объекты ближе 150 блоков к обозначенной границе чужой частной территории.</span></p>
+        <p class="rule"><span class="num">5.2</span><span>Владелец вправе попросить любого игрока покинуть свою частную территорию. После просьбы игрок обязан уйти в течение 5 минут.</span></p>
+        <p class="rule"><span class="num">5.3</span><span>Владелец не вправе применять силу для удаления нарушителя, кроме случаев, прямо указанных в п. 5.3.1. Запрещено: ставить ловушки, замуровывать, заливать лавой/водой, ломать вещи нарушителя, гриферить в ответ.</span></p>
+
+        <div class="rule rule--block">
+          <span class="num">5.3.1</span>
+          <div>
+            <p><strong>Право на самозащиту с убийством.</strong> Владелец вправе убить нарушителя на своей частной территории (п. 5.1) только при одновременном соблюдении условий:</p>
+            <ul class="bullets">
+              <li>нарушитель находится на территории после просьбы уйти (п. 5.2) или совершает кражу, гриферство, поджог или взрыв прямо сейчас;</li>
+              <li>владелец до убийства зафиксировал нарушение: скриншот, запись, координаты, время (или <code>/co i</code>);</li>
+              <li>убийство совершено внутри территории владельца: в пределах забора, стен, ворот или обозначенной зоны. Если нарушитель пересёк границу и находится внутри — можно. Если стоит снаружи, даже вплотную к забору, или владелец погнался за ним за пределы территории — нельзя, это PvP без согласия;</li>
+              <li>владелец обязан вернуть все выпавшие вещи нарушителя в течение 1 часа лично.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="rule rule--block">
+          <span class="num">5.3.2</span>
+          <div>
+            <p><strong>Провокация у границы.</strong> Если игрок стоит вплотную к границе территории и провоцирует владельца (кидает предметы, ломает блоки снаружи, заманивает мобов, мешает), владелец не вправе его убивать, но вправе зафиксировать нарушение и подать тикет. Провокация наказывается по п. 5.5.</p>
+          </div>
+        </div>
+
+        <div class="rule rule--block">
+          <span class="num">5.3.3</span>
+          <div>
+            <p><strong>Что запрещено под видом самозащиты:</strong></p>
+            <ul class="bullets">
+              <li>убивать без фиксации нарушения;</li>
+              <li>убивать после того, как нарушитель ушёл с территории;</li>
+              <li>преследовать и убивать вне своей территории;</li>
+              <li>забирать вещи себе, «возвращать» частично, тянуть с возвратом.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="rule rule--block">
+          <span class="num">5.4</span>
+          <div>
+            <p>На чужой территории без разрешения владельца запрещено:</p>
+            <ul class="bullets">
+              <li>использовать чужие ресурсы;</li>
+              <li>использовать чужие механизмы;</li>
+              <li>ставить и ломать блоки, копать и т.п.;</li>
+              <li>оставлять мусор, таблички, постройки;</li>
+              <li>AFK-стоять в проходах, дверях, на лестницах;</li>
+              <li>следовать за владельцем, «стоять над душой», открывать-закрывать двери.</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="rule"><span class="num">5.5</span><span>Запрещено намеренно нарушать границы, чтобы вызвать реакцию: стоять на территории после просьбы уйти, преследовать игрока, блокировать проход, «случайно» ломать или ставить блоки у чужих построек, заманивать мобов, провоцировать у границы. Ответная реакция владельца (PvP) тоже нарушение, но провокация учитывается при разборе.</span></p>
+        <p class="rule"><span class="num">5.6</span><span>Если владелец не заходил более 20 дней и не предупредил администрацию через тикет, территория может быть передана или использована по решению администрации. Это не отменяет запрет на гриферство: сносить можно только по решению администрации.</span></p>
+        <p class="rule"><span class="num">5.7</span><span>Общественная территория — это зона спавна, общественные дороги, мосты, порталы, станции, фермы, рынки, ивент-площадки и любые объекты, согласованные с администрацией или ответственным за спавн.</span></p>
+
+        <div class="rule rule--block">
+          <span class="num">5.7.1</span>
+          <div>
+            <p><strong>Радиус 200 блоков от 0,0 — общественная зона.</strong> Здесь разрешены: общественные постройки (дороги, станции, порталы, рынок, информационные стенды, ивент-площадки), временные постройки по согласованию, личные проекты — только после одобрения администрацией (заявка в тикете с координатами и скриншотом).</p>
+            <p>Запрещено без согласования: строить, ломать, копать, размещать механизмы, сундуки, бочки, шалкеры, печи; заливать жидкости, разводить огонь, спавнить мобов; захламлять территорию, ставить таблички с рекламой или оскорблениями; блокировать проходы и общественные объекты.</p>
+          </div>
+        </div>
+
+        <p class="rule"><span class="num">5.7.2</span><span>Администрация назначает ответственного за спавн (или ведёт его сама). Ответственный рассматривает заявки на постройки, следит за состоянием зоны, при необходимости сносит заброшенное, фиксирует решения.</span></p>
+        <p class="rule"><span class="num">5.7.3</span><span>Постройки, возведённые на территории спавна до введения правил или без согласования, рассматриваются отдельно: если не мешают — остаются, владелец уведомляется; если мешают или заброшены — переносятся или сносятся по решению ответственного за спавн.</span></p>
+      </div>
+    </details>
+
+    <p class="fine">Редакция от 29.10.2026. Администрация вправе уточнять формулировки, не создавая новых запретов задним числом (п. 1.8).</p>
+  </section>
+
+  <!-- ============================ ДОНАТ ============================ -->
+  <section class="panel" data-panel="donate" role="tabpanel" aria-label="Донат" hidden>
+    <header class="section-head">
+      <span class="eyebrow">✦ Поддержка проекта</span>
+      <h2>Донат</h2>
+      <p>Сервер живёт на добровольные пожертвования. Всеми донатами занимается лично <strong>Art1Night</strong> — тикеты для этого не нужны. Оплата на donatex, выдача вручную, поэтому это занимает время, а не секунды.</p>
+    </header>
+
+    <div class="price-grid">
+      <article class="card price price--main">
+        <div class="price__top">
+          <h3>Спонсорка</h3>
+          <span class="tag tag--amber">ежемесячно</span>
+        </div>
+        <div class="price__value">250 ₽<small>/ мес</small></div>
+        <ul class="perks">
+          <li>Роль <span class="role">@SPONSOR</span> в Discord</li>
+          <li>Префикс и иконка спонсора в игре</li>
+          <li>Просмотр истории взаимодействия по радиусу (<code>/co near</code>)</li>
+          <li>Смена игрового роста от 0.8 до 1.2 (<code>/resize</code>) — раз в 15 дней</li>
+          <li>Кастомный суффикс справа от ника</li>
+          <li>Кастомные названия предметов с цветовыми кодами (<code>/rename</code>)</li>
+          <li>Приглашение друга на сервер без вайтлист-заявки</li>
+        </ul>
+        <a class="btn btn--primary btn--wide" href="https://donatex.gg/donate/Art1Night" target="_blank" rel="noopener">Оплатить спонсорку</a>
+      </article>
+
+      <article class="card price">
+        <div class="price__top">
+          <h3>Разбан</h3>
+          <span class="tag">разово</span>
+        </div>
+        <div class="price__value">400 ₽</div>
+        <p class="price__desc">Снятие блокировки аккаунта. Если бан был за читы, гриферство или угрозы — Art1Night сначала разберётся в ситуации: разбан не отменяет проверку.</p>
+        <a class="btn btn--ghost btn--wide" href="https://donatex.gg/donate/Art1Night" target="_blank" rel="noopener">Оплатить разбан</a>
+      </article>
+    </div>
+
+    <div class="card pay-card">
+      <div class="pay-card__head">
+        <h3>Оплата и выдача</h3>
+        <a class="pay-link" href="https://donatex.gg/donate/Art1Night" target="_blank" rel="noopener">donatex.gg/donate/Art1Night ↗</a>
+      </div>
+      <ol class="pay-steps">
+        <li><span>1</span><p>Оплати услугу на donatex — картой или удобным способом.</p></li>
+        <li><span>2</span><p>Напиши Art1Night в Discord: ник, услуга и чек. Тикет создавать не нужно.</p></li>
+      </ol>
+      <p class="fine">Средства за платные услуги — добровольное пожертвование и возврату не подлежат (п. 1.3). Спонсорка не даёт преимущества в бою и не влияет на модерацию.</p>
+    </div>
+  </section>
+
+  <!-- ============================ СТАФФ ============================ -->
+  <section class="panel" data-panel="staff" role="tabpanel" aria-label="Стафф" hidden>
+    <header class="section-head">
+      <span class="eyebrow">✦ Команда</span>
+      <h2>Стафф</h2>
+      <p>Основатель, куратор модерации, техадмин и модераторы. Все вопросы — через тикеты в Discord, так их ничего не теряет.</p>
+    </header>
+
+    <article class="card founder">
+      <div class="founder__avatar">
+        <img src="img/art1night.png" alt="Скин Art1Night" width="320" height="320">
+      </div>
+      <div class="founder__body">
+        <span class="eyebrow">✦ Основатель</span>
+        <h3>Art1Night</h3>
+        <p class="founder__desc">Придумал VanillaNight и держит курс: правила, развитие проекта, состав команды, спорные ситуации и донат-услуги.</p>
+      </div>
+      <span class="founder__mark" aria-hidden="true">✦</span>
+    </article>
+
+    <div class="staff-grid">
+      <article class="card person">
+        <span class="avatar avatar--photo"><img src="img/1021.jpg" alt="Аватар 1021" width="256" height="256"></span>
+        <div>
+          <h3>1021</h3>
+          <p class="person__role">Техадмин</p>
+          <p class="person__desc">Сервер, плагины, моды и технические вопросы.</p>
+        </div>
+      </article>
+      <article class="card person">
+        <span class="avatar avatar--c">V</span>
+        <div>
+          <h3>vova_11643</h3>
+          <p class="person__role">Куратор модерации</p>
+          <p class="person__desc">Следит за порядком, разбирает жалобы и координирует модераторов.</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="card mods">
+      <div class="mods__head">
+        <span class="eyebrow">Модерация</span>
+        <span class="mods__hint">3 человека</span>
+      </div>
+      <ul class="mods__list">
+        <li>WhiteSoulRR</li>
+        <li>kekmorii</li>
+        <li>sasandra</li>
+      </ul>
+    </div>
+
+    <div class="notice">
+      <strong>Не пишите в личку по игровым вопросам.</strong> П. 4.9: администрация отвечает только в тикетах. Исключение — донаты: ими занимается Art1Night лично.
+    </div>
+  </section>
+
+  <!-- ============================ FAQ ============================ -->
+  <section class="panel" data-panel="faq" role="tabpanel" aria-label="FAQ" hidden>
+    <header class="section-head">
+      <span class="eyebrow">✦ Коротко</span>
+      <h2>Частые вопросы</h2>
+    </header>
+
+    <details class="acc acc--faq" open>
+      <summary>Как зайти на сервер?<span></span></summary>
+      <div class="acc__body"><p>IP в блоке «Подключение» на главной: <code>135.125.188.210:40029</code> (main) или <code>212.22.85.14:40029</code> (ru). Версия 1.21–26.3, Java Edition.</p></div>
+    </details>
+    <details class="acc acc--faq">
+      <summary>Нужен ли вайтлист?<span></span></summary>
+      <div class="acc__body"><p>Да. Заявка — в Discord-тикете: ник, версия, пара слов о себе. После одобрения доступ открывается.</p></div>
+    </details>
+    <details class="acc acc--faq">
+      <summary>Можно ли с пиратки?<span></span></summary>
+      <div class="acc__body"><p>Да, лицензия не обязательна. Ограничения по модам и поведению — те же.</p></div>
+    </details>
+    <details class="acc acc--faq">
+      <summary>С какой версии играть?<span></span></summary>
+      <div class="acc__body"><p>1.21 – 26.3, ядро 1.21.11. Рекомендуемые моды: Simple Voice Chat, EmoteCraft, PatPat, Customizable Player Models.</p></div>
+    </details>
+    <details class="acc acc--faq">
+      <summary>Есть приваты, магазины, /home?<span></span></summary>
+      <div class="acc__body"><p>Нет. Это чистая ваниль: территории защищаются правилами (раздел 5), а не плагинами. Общественная зона — радиус 200 блоков от 0,0.</p></div>
+    </details>
+    <details class="acc acc--faq">
+      <summary>Как получить спонсорку или разбан?<span></span></summary>
+      <div class="acc__body"><p>Оплатить на <a href="https://donatex.gg/donate/Art1Night" target="_blank" rel="noopener">donatex.gg</a> и написать Art1Night в Discord — тикет не нужен. Выдача ручная. Подробнее — в разделе «Донат».</p></div>
+    </details>
+    <details class="acc acc--faq">
+      <summary>Как пожаловаться на игрока?<span></span></summary>
+      <div class="acc__body"><p>Тикет в Discord. Приложи доказательства: скриншот или запись, координаты, время. Жалобы на незначительные нарушения — 3 дня; на читы, гриферство и угрозы — без срока.</p></div>
+    </details>
+    <details class="acc acc--faq">
+      <summary>Почему меня забанили и что делать?<span></span></summary>
+      <div class="acc__body"><p>Причина и срок указываются при бане. Можно подать апелляцию в тикете или оформить разбан (400 ₽) — но апелляция всё равно рассматривается.</p></div>
+    </details>
+  </section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap foot-row">
+    <div>
+      <strong>VanillaNight</strong>
+      <p>Чистое ванильное выживание · сезон с 16.10.2026</p>
+    </div>
+    <nav class="foot-links" aria-label="Ссылки">
+      <a href="https://discord.gg/eUhHUwq5Gh" target="_blank" rel="noopener">Discord</a>
+      <a href="https://donatex.gg/donate/Art1Night" target="_blank" rel="noopener">Донат</a>
+      <a href="#rules" data-tab="rules">Правила</a>
+      <a href="#faq" data-tab="faq">FAQ</a>
+    </nav>
+    <div class="foot-bottom">
+      <p class="foot-fine">Не связан с Mojang Studios и Microsoft. © 2026 VanillaNight</p>
+      <p class="foot-made">сделано <b>Art1Night</b></p>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="app.js"></script>
+</body>
+</html>
