@@ -277,17 +277,23 @@
       canvas.height = Math.round(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      const count = Math.min(90, Math.max(36, Math.round((width * height) / 11000)));
-      stars = Array.from({ length: count }, () => ({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        r: Math.random() * 1.05 + 0.3,
-        z: 0.2 + Math.random() * 0.8,
-        vx: (Math.random() - 0.5) * 0.14,
-        vy: (Math.random() - 0.5) * 0.09,
-        a: 0.2 + Math.random() * 0.5,
-        p: Math.random() * Math.PI * 2,
-      }));
+      const count = Math.min(170, Math.max(70, Math.round((width * height) / 6500)));
+      const tints = ["#e6ebff", "#cfd8ff", "#a5f3fc", "#ddd6fe"];
+      stars = Array.from({ length: count }, () => {
+        const big = Math.random() < 0.14;
+        return {
+          x: Math.random() * width,
+          y: Math.random() * height,
+          r: big ? 1.7 + Math.random() * 1.1 : 0.5 + Math.random() * 1.2,
+          z: 0.2 + Math.random() * 0.8,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: (Math.random() - 0.5) * 0.2,
+          a: 0.45 + Math.random() * 0.5,
+          p: Math.random() * Math.PI * 2,
+          big,
+          tint: tints[(Math.random() * tints.length) | 0],
+        };
+      });
     }
 
     function draw(time) {
@@ -301,11 +307,26 @@
           if (s.y < -4) s.y = height + 4;
           else if (s.y > height + 4) s.y = -4;
         }
-        const twinkle = reduceMotion ? 1 : 0.75 + 0.25 * Math.sin(time / 1600 + s.p);
-        ctx.globalAlpha = Math.min(1, s.a * twinkle);
-        ctx.fillStyle = "#cfd8ff";
+        const twinkle = reduceMotion ? 1 : 0.65 + 0.35 * Math.sin(time / 1200 + s.p);
+        const alpha = Math.min(1, s.a * twinkle);
+        const x = s.x + mx * s.z;
+        const y = s.y + my * s.z;
+
+        if (s.big) {
+          ctx.globalAlpha = 1;
+          const glow = ctx.createRadialGradient(x, y, 0, x, y, s.r * 6);
+          glow.addColorStop(0, "rgba(198, 224, 255, " + (0.3 * alpha).toFixed(3) + ")");
+          glow.addColorStop(1, "rgba(198, 224, 255, 0)");
+          ctx.fillStyle = glow;
+          ctx.beginPath();
+          ctx.arc(x, y, s.r * 6, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = s.tint;
         ctx.beginPath();
-        ctx.arc(s.x + mx * s.z, s.y + my * s.z, s.r, 0, Math.PI * 2);
+        ctx.arc(x, y, s.r, 0, Math.PI * 2);
         ctx.fill();
       }
       ctx.globalAlpha = 1;
@@ -322,8 +343,8 @@
 
     hero.addEventListener("pointermove", (e) => {
       const rect = hero.getBoundingClientRect();
-      tx = ((e.clientX - rect.left) / rect.width - 0.5) * 42;
-      ty = ((e.clientY - rect.top) / rect.height - 0.5) * 28;
+      tx = ((e.clientX - rect.left) / rect.width - 0.5) * 64;
+      ty = ((e.clientY - rect.top) / rect.height - 0.5) * 42;
     });
     hero.addEventListener("pointerleave", () => {
       tx = 0;
