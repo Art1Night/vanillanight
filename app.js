@@ -465,6 +465,16 @@
     reopened.length = 0;
   });
 
+  /* ------------------------------- Сезон ------------------------------- */
+
+  (function seasonCounter() {
+    const el = $("#seasonDay");
+    if (!el) return;
+    const start = new Date(2026, 9, 16);
+    const day = Math.max(1, Math.floor((Date.now() - start.getTime()) / 86400000) + 1);
+    el.textContent = "день " + day;
+  })();
+
   /* ------------------------------- Старт ------------------------------- */
 
   show(currentId(), { scroll: false });
