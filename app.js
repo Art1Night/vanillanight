@@ -9,7 +9,23 @@
 
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const forceMotion = document.documentElement.classList.contains("force-motion");
+  const reduceMotion = prefersReduced && !forceMotion;
+
+  const motionToggle = $("#motionToggle");
+  if (motionToggle && prefersReduced) {
+    motionToggle.hidden = false;
+    motionToggle.textContent = forceMotion ? "Выключить анимацию" : "Включить анимацию";
+    motionToggle.addEventListener("click", () => {
+      try {
+        localStorage.setItem("vn-motion", forceMotion ? "0" : "1");
+      } catch (e) {
+        /* ignore */
+      }
+      window.location.reload();
+    });
+  }
 
   /* ------------------------------ Разделы ------------------------------ */
 
@@ -263,6 +279,7 @@
     let width = 0;
     let height = 0;
     let stars = [];
+    const meteors = [];
     let mx = 0;
     let my = 0;
     let tx = 0;
@@ -286,13 +303,23 @@
           y: Math.random() * height,
           r: big ? 1.7 + Math.random() * 1.1 : 0.5 + Math.random() * 1.2,
           z: 0.2 + Math.random() * 0.8,
-          vx: (Math.random() - 0.5) * 0.3,
-          vy: (Math.random() - 0.5) * 0.2,
+          vx: (Math.random() - 0.5) * 1.6,
+          vy: (Math.random() - 0.5) * 1.1,
           a: 0.45 + Math.random() * 0.5,
           p: Math.random() * Math.PI * 2,
           big,
           tint: tints[(Math.random() * tints.length) | 0],
         };
+      });
+    }
+
+    function spawnMeteor() {
+      meteors.push({
+        x: width * (0.55 + Math.random() * 0.45),
+        y: height * (0.05 + Math.random() * 0.35),
+        vx: -(5 + Math.random() * 4),
+        vy: 2.2 + Math.random() * 2,
+        life: 1,
       });
     }
 
@@ -307,7 +334,7 @@
           if (s.y < -4) s.y = height + 4;
           else if (s.y > height + 4) s.y = -4;
         }
-        const twinkle = reduceMotion ? 1 : 0.65 + 0.35 * Math.sin(time / 1200 + s.p);
+        const twinkle = reduceMotion ? 1 : 0.55 + 0.45 * Math.sin(time / 900 + s.p);
         const alpha = Math.min(1, s.a * twinkle);
         const x = s.x + mx * s.z;
         const y = s.y + my * s.z;
@@ -321,6 +348,14 @@
           ctx.beginPath();
           ctx.arc(x, y, s.r * 6, 0, Math.PI * 2);
           ctx.fill();
+
+          ctx.globalAlpha = alpha * 0.4;
+          ctx.strokeStyle = s.tint;
+          ctx.lineWidth = Math.max(1, s.r * 0.7);
+          ctx.beginPath();
+          ctx.moveTo(x, y);
+          ctx.lineTo(x - s.vx * 14, y - s.vy * 14);
+          ctx.stroke();
         }
 
         ctx.globalAlpha = alpha;
@@ -330,6 +365,31 @@
         ctx.fill();
       }
       ctx.globalAlpha = 1;
+
+      if (!reduceMotion && Math.random() < 0.006) spawnMeteor();
+
+      for (let i = meteors.length - 1; i >= 0; i--) {
+        const m = meteors[i];
+        m.x += m.vx;
+        m.y += m.vy;
+        m.life -= 0.022;
+        if (m.life <= 0 || m.y > height + 40 || m.x < -80) {
+          meteors.splice(i, 1);
+          continue;
+        }
+        const tailX = m.x - m.vx * 6;
+        const tailY = m.y - m.vy * 6;
+        const grad = ctx.createLinearGradient(m.x, m.y, tailX, tailY);
+        grad.addColorStop(0, "rgba(232, 240, 255, " + (0.85 * m.life).toFixed(3) + ")");
+        grad.addColorStop(1, "rgba(232, 240, 255, 0)");
+        ctx.globalAlpha = 1;
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(m.x, m.y);
+        ctx.lineTo(tailX, tailY);
+        ctx.stroke();
+      }
     }
 
     function frame(time) {
