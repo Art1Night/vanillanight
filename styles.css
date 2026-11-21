@@ -781,7 +781,7 @@ code {
   color: #c4b5fd;
   transition: background .2s, border-color .2s, color .2s, transform .2s;
 }
-.twitch-badge svg { width: 15px; height: 15px; fill: currentColor; }
+.twitch-badge svg { width: 15px; height: 15px; display: block; fill: currentColor; }
 .twitch-badge:hover {
   background: #9146ff;
   border-color: #9146ff;
@@ -900,7 +900,7 @@ code {
   white-space: nowrap;
   transition: background .2s, border-color .2s, color .2s, transform .2s;
 }
-.streamer__btn svg { width: 13px; height: 13px; fill: currentColor; }
+.streamer__btn svg { width: 13px; height: 13px; display: block; fill: currentColor; }
 .streamer__btn:hover {
   background: #9146ff;
   border-color: #9146ff;
