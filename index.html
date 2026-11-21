@@ -6,6 +6,7 @@
 <title>VanillaNight — чистое ванильное выживание · 1.21–26.3</title>
 <meta name="description" content="Ванильный Minecraft-сервер без приватов, магазинов и pay-to-win. Вайтлист по заявке, голосовой чат, два подключения. IP: 135.125.188.210:40029">
 <meta name="theme-color" content="#05070f">
+<script>try{if(localStorage.getItem("vn-motion")==="1")document.documentElement.classList.add("force-motion")}catch(e){}</script>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VanillaNight">
 <meta property="og:title" content="VanillaNight — чистое ванильное выживание">
@@ -24,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Unbounded:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=9">
+<link rel="stylesheet" href="styles.css?v=10">
 </head>
 <body>
 <canvas id="stars" aria-hidden="true"></canvas>
@@ -540,12 +541,13 @@
     </nav>
     <div class="foot-bottom">
       <p class="foot-fine">Не связан с Mojang Studios и Microsoft. © 2026 VanillaNight</p>
+      <button class="motion-toggle" id="motionToggle" type="button" hidden>Включить анимацию</button>
       <p class="foot-made">сделано <b>Art1Night</b></p>
     </div>
   </div>
 </footer>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script src="app.js?v=2"></script>
+<script src="app.js?v=4"></script>
 </body>
 </html>
