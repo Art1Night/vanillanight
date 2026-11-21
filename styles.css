@@ -352,6 +352,31 @@ code {
   letter-spacing: .02em;
 }
 
+.whitelist-note {
+  margin-top: 18px;
+  padding: 14px 16px;
+  max-width: 480px;
+  border: 1px solid rgba(167, 139, 250, .24);
+  border-left: 3px solid var(--violet);
+  border-radius: 12px;
+  background: rgba(167, 139, 250, .07);
+}
+.whitelist-note__title {
+  display: block;
+  font: 600 10.5px/1 var(--font);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #c4b5fd;
+}
+.whitelist-note p {
+  margin: 7px 0 0;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #c6cdf0;
+}
+.whitelist-note b { color: #fff; }
+.whitelist-note code { font-size: .85em; padding: 1px 5px; }
+
 .server-card {
   position: relative;
   padding: 22px;
