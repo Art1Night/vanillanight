@@ -254,7 +254,7 @@
   /* --------------------------- Появление блоков --------------------------- */
 
   if (!reduceMotion && "IntersectionObserver" in window) {
-    const items = $$(".block, .cta-band, .price, .person, .mods, .founder");
+    const items = $$(".block, .cta-band, .price, .person, .mods, .media, .founder");
     items.forEach((el) => el.classList.add("reveal"));
 
     const observer = new IntersectionObserver(
