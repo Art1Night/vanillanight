@@ -251,6 +251,102 @@
     loop(0);
   })();
 
+  /* --------------------------- Звёзды в hero --------------------------- */
+
+  (function heroStars() {
+    const canvas = $("#hero-stars");
+    if (!canvas) return;
+    const hero = canvas.closest(".hero");
+    const ctx = canvas.getContext("2d");
+    if (!ctx || !hero) return;
+
+    let width = 0;
+    let height = 0;
+    let stars = [];
+    let mx = 0;
+    let my = 0;
+    let tx = 0;
+    let ty = 0;
+    let last = 0;
+
+    function build() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = canvas.clientWidth;
+      height = canvas.clientHeight;
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      const count = Math.min(90, Math.max(36, Math.round((width * height) / 11000)));
+      stars = Array.from({ length: count }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        r: Math.random() * 1.05 + 0.3,
+        z: 0.2 + Math.random() * 0.8,
+        vx: (Math.random() - 0.5) * 0.14,
+        vy: (Math.random() - 0.5) * 0.09,
+        a: 0.2 + Math.random() * 0.5,
+        p: Math.random() * Math.PI * 2,
+      }));
+    }
+
+    function draw(time) {
+      ctx.clearRect(0, 0, width, height);
+      for (const s of stars) {
+        if (!reduceMotion) {
+          s.x += s.vx;
+          s.y += s.vy;
+          if (s.x < -4) s.x = width + 4;
+          else if (s.x > width + 4) s.x = -4;
+          if (s.y < -4) s.y = height + 4;
+          else if (s.y > height + 4) s.y = -4;
+        }
+        const twinkle = reduceMotion ? 1 : 0.75 + 0.25 * Math.sin(time / 1600 + s.p);
+        ctx.globalAlpha = Math.min(1, s.a * twinkle);
+        ctx.fillStyle = "#cfd8ff";
+        ctx.beginPath();
+        ctx.arc(s.x + mx * s.z, s.y + my * s.z, s.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    function frame(time) {
+      window.requestAnimationFrame(frame);
+      if (time - last < 33) return;
+      last = time;
+      mx += (tx - mx) * 0.05;
+      my += (ty - my) * 0.05;
+      draw(time);
+    }
+
+    hero.addEventListener("pointermove", (e) => {
+      const rect = hero.getBoundingClientRect();
+      tx = ((e.clientX - rect.left) / rect.width - 0.5) * 42;
+      ty = ((e.clientY - rect.top) / rect.height - 0.5) * 28;
+    });
+    hero.addEventListener("pointerleave", () => {
+      tx = 0;
+      ty = 0;
+    });
+
+    build();
+    if (reduceMotion) {
+      draw(0);
+    } else {
+      window.requestAnimationFrame(frame);
+    }
+
+    let resizeTimer = 0;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        build();
+        if (reduceMotion) draw(0);
+      }, 160);
+    });
+  })();
+
   /* --------------------------- Появление блоков --------------------------- */
 
   if (!reduceMotion && "IntersectionObserver" in window) {
