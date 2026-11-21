@@ -858,6 +858,7 @@ code {
 
 .person--wide { grid-column: 1 / -1; align-items: center; }
 .person--wide .person__desc { margin: 0 0 0 auto; max-width: 48ch; }
+.person--bottom { margin-top: 16px; }
 
 .mods {
   margin-top: 16px;
