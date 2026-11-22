@@ -470,9 +470,27 @@
   (function seasonCounter() {
     const el = $("#seasonDay");
     if (!el) return;
-    const start = new Date(2026, 9, 16);
-    const day = Math.max(1, Math.floor((Date.now() - start.getTime()) / 86400000) + 1);
-    el.textContent = "день " + day;
+
+    // 16.10.2026 00:00 по Москве
+    const start = Date.UTC(2026, 9, 15, 21, 0, 0);
+
+    function plural(n, one, few, many) {
+      const n10 = n % 10;
+      const n100 = n % 100;
+      if (n10 === 1 && n100 !== 11) return one;
+      if (n10 >= 2 && n10 <= 4 && (n100 < 12 || n100 > 14)) return few;
+      return many;
+    }
+
+    function update() {
+      const days = Math.max(0, Math.floor((Date.now() - start) / 86400000));
+      el.textContent = days === 0
+        ? "день вайпа"
+        : days + " " + plural(days, "день", "дня", "дней") + " с вайпа";
+    }
+
+    update();
+    setInterval(update, 60000);
   })();
 
   /* ------------------------------- Старт ------------------------------- */
