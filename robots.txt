@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /rules-v2.html
+
+Sitemap: https://art1night.fun/sitemap.xml
